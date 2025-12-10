@@ -4,21 +4,26 @@ import com.hello.core.member.Grade;
 import com.hello.core.member.Member;
 import com.hello.core.member.MemberService;
 import com.hello.core.member.MemberServiceImpl;
-import org.springframework.boot.SpringApplication;
+import com.hello.core.order.Order;
+import com.hello.core.order.OrderService;
+import com.hello.core.order.OrderServiceImpl;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MemberApp {
+public class OrderApp {
 
     public static void main(String[] args) {
 
         MemberService memberService = new MemberServiceImpl();
-        Member member = new Member(1L, "memberA", Grade.VIP);
+        OrderService orderService = new OrderServiceImpl();
+
+        long memberId = 1L;
+        Member member = new Member(memberId, "memberA", Grade.VIP);
         memberService.join(member);
 
-        Member findMember = memberService.findMember(1L);
-        System.out.println("new member = " + member.getName());
-        System.out.println("find Member = " + findMember.getName());
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
+
+        System.out.println("order = " + order);
     }
 
 }
